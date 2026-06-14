@@ -1,0 +1,98 @@
+/**
+ * Swatch — admin settings styles. Dark-mode aware, accessible help tooltips.
+ */
+.swatch-admin__intro {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	max-width: 760px;
+	margin: 16px 0 24px;
+	padding: 16px 20px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-left: 4px solid #2271b1;
+	border-radius: 4px;
+}
+
+.swatch-admin__intro-icon svg {
+	width: 32px;
+	height: 32px;
+	color: #2271b1;
+}
+
+.swatch-admin__intro-text h2 {
+	margin: 0 0 4px;
+	font-size: 15px;
+}
+
+.swatch-admin__intro-text p {
+	margin: 0;
+	color: #50575e;
+}
+
+.swatch-admin__section {
+	max-width: 760px;
+	margin: 0 0 8px;
+	padding: 4px 20px 8px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+.swatch-admin__section + .swatch-admin__section {
+	margin-top: 16px;
+}
+
+.swatch-help {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1;
+	color: #2271b1;
+	background: transparent;
+	border: 1px solid currentColor;
+	border-radius: 50%;
+	cursor: help;
+	vertical-align: middle;
+}
+
+.swatch-help:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+.swatch-help-tip {
+	display: block;
+	max-width: 320px;
+	margin-top: 6px;
+	padding: 8px 10px;
+	font-weight: 400;
+	color: #1d2327;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+	.swatch-admin__intro,
+	.swatch-admin__section {
+		background: #1d2327;
+		border-color: #3c434a;
+	}
+
+	.swatch-admin__intro-text p {
+		color: #c3c4c7;
+	}
+
+	.swatch-help-tip {
+		color: #f0f0f1;
+		background: #2c3338;
+		border-color: #3c434a;
+	}
+}
