@@ -1,49 +1,30 @@
-# Swatch — Variation Swatches for WooCommerce
+# Swatch
 
-Replace WooCommerce's default variation `<select>` dropdowns with accessible
-colour and label swatches. Self-contained — no external services, no Composer
-runtime dependencies.
+Swatch replaces WooCommerce's default variation dropdowns with accessible colour and label swatches on your single product pages, so shoppers can pick options visually instead of from a `<select>` menu.
 
-## What it does
+## Features
 
-- Per-attribute swatch **type** (colour or button/label), set on the global
-  attribute screen.
-- Per-term **colour** (`sanitize_hex_color`) and custom **label**, stored as
-  term meta.
-- Front-end swatches wired into WooCommerce's native variations form (sets the
-  hidden `<select>` and dispatches `change`), so price/stock/add-to-cart update
-  normally. Selected and out-of-combination states reflected via WooCommerce's
-  own variation events. Vanilla JS, no jQuery.
-- Settings page under **WooCommerce → Swatch**: enable/disable, default type,
-  size, shape, tooltip, selected-value label.
-- Graceful fallback to the standard dropdown when an attribute has no swatch
-  data (e.g. colour type with no colours configured).
+- Colour and button/label swatch types, chosen per attribute on the global attribute screen.
+- Per-term colour and custom label, stored as term meta.
+- Drives WooCommerce's native variations form, so price, stock and the add-to-cart button update exactly as with the standard dropdown. Vanilla JavaScript, no jQuery.
+- Keyboard operable and screen-reader labelled, with visible focus and no layout shift.
+- Settings page under WooCommerce → Swatch: enable/disable, default type, size, shape and tooltip.
+- Graceful fallback to the standard dropdown when an attribute has no swatch data.
 
-## Architecture
+## Installation
 
-- `swatch.php` — bootstrap. Boots on `init:0` and fires `swatch/booted`.
-- `src/Plugin.php` — singleton + DI container, `url()` / `path()` helpers.
-- `src/Container.php` — minimal DI container (`singleton`, `get`, `has`).
-- `config/{services,hooks,defaults}.php` — service wiring, boot order, defaults.
-- `src/Service/SwatchData.php` — reads/writes attribute types + term meta.
-- `src/Service/Settings.php` — resolves settings (defaults + stored option).
-- `src/Service/FrontendRenderer.php` — filters the variation dropdown HTML.
-- `src/Admin/Settings.php` — settings screen.
-- `src/Admin/AttributeFields.php` — type selector + per-term colour/label fields.
-- `assets/` — `swatch.css` / `swatch.js` (front-end), `admin.css`.
+1. Upload the plugin to `/wp-content/plugins/swatch`, or install it from Plugins → Add New.
+2. Activate it. WooCommerce must be active.
+3. Go to WooCommerce → Swatch to set the defaults, then assign a colour or label to your attribute terms under Products → Attributes.
 
-PRO companions hook `add_action('swatch/booted', ...)`.
+## Frequently Asked Questions
 
-## Development
+**Does it require WooCommerce?**
+Yes. Swatch extends WooCommerce variable products and does nothing without it.
 
-```bash
-composer install
-composer cs        # PHPCS
-composer analyse   # PHPStan level 6
-node --check assets/js/swatch.js
-wp i18n make-pot . languages/swatch.pot --domain=swatch --exclude=vendor,node_modules,tests
-```
+**What happens to attributes I have not configured?**
+They keep WooCommerce's standard dropdown, so nothing ever breaks.
 
-## License
+Built by WPPoland — https://plogins.com
 
-GPL-2.0-or-later.
+License: GPL-2.0-or-later
