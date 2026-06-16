@@ -17,6 +17,8 @@ Swatch replaces WooCommerce's default variation `<select>` dropdowns with visual
 
 The swatches drive WooCommerce's own variations form, so price, stock and the add-to-cart button update exactly as they do with the stock dropdowns. Selected and out-of-combination states are reflected automatically.
 
+The full source lives on GitHub at https://github.com/wppoland/swatch if you want to read the code or report a problem.
+
 **Features**
 
 * Colour and button/label swatch types.
