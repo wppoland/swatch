@@ -1,0 +1,110 @@
+/**
+ * Swatch — admin settings styles.
+ *
+ * Native wp-admin first: this only dresses the Swatch settings page, scoped to
+ * `.swatch-settings` so it never leaks onto other screens. The one distinctive
+ * touch is a thin vermilion accent bar on each section card — the same
+ * paint-chip "marker ink" the storefront swatches use — kept to a UI accent
+ * role only.
+ *
+ * Contrast (WCAG, computed against the wp-admin surface):
+ *   - Accent bar  #e2542c on #fff = 3.79:1  (UI element, AA needs 3:1)  PASS
+ *   - Accent text #c2410c on #fff = 5.18:1  (text, AA needs 4.5:1)      PASS
+ *                 #c2410c on #f0f0f1 = 4.55:1                            PASS
+ *   - Body copy uses WP's own #1d2327 / #3c434a — unchanged.
+ */
+
+.swatch-settings .swatch-intro {
+	max-width: 46rem;
+	margin: 0.5em 0 1.5em;
+	font-size: 14px;
+	color: #3c434a;
+}
+
+/* Section cards — native WP "postbox" feel, with one accent edge. */
+.swatch-settings .swatch-section {
+	max-width: 46rem;
+	margin: 0 0 20px;
+	padding: 4px 24px 8px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #e2542c; /* 3.79:1 vs #fff — UI accent */
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.swatch-settings .swatch-section > h2 {
+	margin: 16px 0 2px;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #1d2327;
+}
+
+.swatch-settings .swatch-section__hint {
+	margin: 2px 0 4px;
+	color: #50575e;
+	font-size: 13px;
+}
+
+/* "Default" pill next to a control whose value matches the shipped default. */
+.swatch-settings .swatch-default-tag {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 1px 8px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.6;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #c2410c; /* 5.18:1 vs #fff — AA text */
+	background: rgba(226, 84, 44, 0.1);
+	border-radius: 9px;
+	vertical-align: middle;
+}
+
+/* Inline "what it looks like" preview chips, so the type choice is shown, not
+   just named. Purely decorative — aria-hidden in the markup. */
+.swatch-settings .swatch-preview {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+	padding: 8px 12px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+.swatch-settings .swatch-preview__chip {
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 2px solid #1f2328;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #e2542c;
+}
+
+.swatch-settings .swatch-preview__chip--blue {
+	background: #2563a8;
+}
+
+.swatch-settings .swatch-preview__chip--green {
+	background: #2f7d3a;
+}
+
+.swatch-settings .swatch-preview__pill {
+	display: inline-block;
+	padding: 3px 12px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #1f2328;
+	background: #fff;
+	border: 2px solid #1f2328;
+	border-radius: 7px;
+}
+
+.swatch-settings .swatch-preview__label {
+	color: #50575e;
+	font-size: 12px;
+}
