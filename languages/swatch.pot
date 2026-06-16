@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-14T21:55:37+00:00\n"
+"POT-Creation-Date: 2026-06-16T20:22:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: swatch\n"
@@ -51,13 +51,13 @@ msgstr ""
 
 #: src/Admin/AttributeFields.php:72
 #: src/Admin/AttributeFields.php:93
-#: src/Admin/Settings.php:103
+#: src/Admin/Settings.php:136
 msgid "Button / label"
 msgstr ""
 
 #: src/Admin/AttributeFields.php:73
 #: src/Admin/AttributeFields.php:94
-#: src/Admin/Settings.php:104
+#: src/Admin/Settings.php:137
 msgid "Colour"
 msgstr ""
 
@@ -89,32 +89,86 @@ msgstr ""
 msgid "Optional short label for button swatches. Defaults to the term name."
 msgstr ""
 
-#: src/Admin/Settings.php:38
+#: src/Admin/Settings.php:58
 msgid "Swatch Settings"
 msgstr ""
 
-#: src/Admin/Settings.php:39
+#: src/Admin/Settings.php:59
 msgid "Swatch"
 msgstr ""
 
-#: src/Admin/Settings.php:74
-msgid "Swatch replaces the default WooCommerce variation selects with accessible colour or label swatches. Set a colour or label per attribute term on the global attribute screens (Products → Attributes → Configure terms), then choose the default look here."
+#: src/Admin/Settings.php:98
+msgid "Swatch turns WooCommerce variation dropdowns into accessible colour dots and labelled buttons, so shoppers pick a variation in one tap instead of scanning a select menu. It works out of the box — the settings below are only for fine-tuning."
 msgstr ""
 
-#: src/Admin/Settings.php:82
+#: src/Admin/Settings.php:104
+msgid "Storefront display"
+msgstr ""
+
+#: src/Admin/Settings.php:105
+msgid "Controls whether swatches appear on single product pages, and what an unconfigured attribute looks like."
+msgstr ""
+
+#: src/Admin/Settings.php:111
 msgid "Enable swatches"
 msgstr ""
 
-#: src/Admin/Settings.php:92
-msgid "Replace variation dropdowns with swatches on single product pages."
+#: src/Admin/Settings.php:113
+msgid "On by default"
 msgstr ""
 
-#: src/Admin/Settings.php:98
+#: src/Admin/Settings.php:125
+msgid "Show swatches on product pages."
+msgstr ""
+
+#: src/Admin/Settings.php:127
+msgid "When off, shoppers see WooCommerce’s standard variation dropdowns and no swatch styles or scripts load — nothing is lost, the look just reverts to default. Your per-term colours and labels are kept."
+msgstr ""
+
+#: src/Admin/Settings.php:132
 msgid "Default swatch type"
 msgstr ""
 
-#: src/Admin/Settings.php:106
-msgid "Used for any attribute you have not given an explicit type. Attributes with no colours configured automatically fall back to the dropdown, so this is safe to leave on “Colour”."
+#: src/Admin/Settings.php:140
+msgid "Default"
+msgstr ""
+
+#: src/Admin/Settings.php:144
+msgid "Colour:"
+msgstr ""
+
+#: src/Admin/Settings.php:147
+msgid "Button:"
+msgstr ""
+
+#: src/Admin/Settings.php:148
+msgid "Small"
+msgstr ""
+
+#: src/Admin/Settings.php:149
+msgid "Large"
+msgstr ""
+
+#: src/Admin/Settings.php:152
+msgid "Applied to any attribute you have not given its own type. “Colour” renders colour dots (you set a colour per term); “Button / label” renders the term name as a pill. Either way, an attribute with no colours configured falls back to the dropdown automatically — so this choice never breaks a product."
+msgstr ""
+
+#: src/Admin/Settings.php:160
+msgid "Per-attribute setup"
+msgstr ""
+
+#: src/Admin/Settings.php:161
+msgid "Colours and labels live with each attribute, not here — so they stay correct as your catalogue grows."
+msgstr ""
+
+#. translators: %s: link to the WooCommerce Attributes screen.
+#: src/Admin/Settings.php:166
+#, php-format
+msgid "Set a swatch colour or label on each term under %s. Override the default type per attribute on the same screen. Anything left unset uses the default above."
+msgstr ""
+
+#: src/Admin/Settings.php:167
+msgid "Products → Attributes"
 msgstr ""
 
 #: swatch.php:47
