@@ -114,6 +114,17 @@ final class FrontendRenderer implements HasHooks
         $selectId = $this->selectId($args, $attribute);
         $swatches = $this->renderGroup($items, $type, $attribute, $selectId);
 
+        /**
+         * Filters the rendered swatch group markup before it is appended to the
+         * WooCommerce dropdown. Add-ons (e.g. Swatch Pro image swatches) use this
+         * to enhance the buttons the FREE renderer produced.
+         *
+         * @param string               $swatches  The swatch group HTML.
+         * @param string               $attribute Attribute taxonomy/name.
+         * @param array<string, mixed> $args      Original WooCommerce dropdown args.
+         */
+        $swatches = (string) apply_filters('swatch/swatch_group_html', $swatches, $attribute, $args);
+
         // Keep the original <select> in the DOM (the JS hides it) so the native
         // variations form keeps functioning; append the swatch group after it.
         return $html . $swatches;
