@@ -1,31 +1,50 @@
 /**
  * Swatch — front-end styles.
  *
- * Modern, theme-friendly swatches built on custom properties so themes (and the
- * PRO add-on) can override sizing and colours without fighting specificity.
- * Focus-visible rings, sufficient contrast and reduced-motion-guarded
- * transitions are baked in. No layout shift: swatches reserve their size.
+ * The shopper's moment here is the *pick*: the click that commits to a colour.
+ * Swatch borrows the gesture from a paint-chip sample card — when you choose a
+ * colour you circle it. So the selected swatch lifts off the card and a warm
+ * vermilion "marker" ring strokes itself around the chip, the way you'd ring
+ * your choice on a sample fan. One earned micro-interaction; everything else is
+ * quiet and conventional.
+ *
+ * Built on themeable `--swatch-*` custom properties so themes (and the PRO
+ * add-on) can override sizing and colours without fighting specificity. The
+ * accent inherits the theme link colour where one exists, falling back to the
+ * vermilion ink. Focus-visible rings, sufficient contrast and
+ * reduced-motion-guarded transitions are baked in. No layout shift: the lift,
+ * ring and notch all paint inside the swatch's reserved box.
  */
 .swatch-group {
-	--swatch-size: 36px;
+	--swatch-size: 38px;
 	--swatch-min-width: 48px;
-	--swatch-gap: 8px;
-	--swatch-radius: 6px;
+	--swatch-gap: 10px;
+	--swatch-radius: 7px;
 	--swatch-border: #c9ccd1;
-	--swatch-border-selected: #1a1a1a;
-	--swatch-ring: #2271b1;
-	--swatch-fg: #1a1a1a;
+	--swatch-border-selected: #1f2328;
+
+	/* The pick accent — a warm vermilion marker ink, the colour of a circle
+	   drawn around a chosen chip on a sample card. Inherits the theme's own link
+	   colour first where the theme exposes it, so it sits inside the store. */
+	--swatch-ink: var(--wp--preset--color--vivid-red, #e2542c);
+	--swatch-ink-soft: color-mix(in srgb, var(--swatch-ink) 22%, transparent);
+	--swatch-ring: var(--swatch-ink);
+
+	--swatch-fg: #1f2328;
 	--swatch-bg: #fff;
+	/* The "card" the chips sit on — used for the lift shadow contrast. */
+	--swatch-card: var(--wp--preset--color--base, #fff);
 
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	gap: var(--swatch-gap);
-	margin: 6px 0 2px;
+	margin: 8px 0 2px;
 }
 
 .swatch {
 	box-sizing: border-box;
+	position: relative;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -38,27 +57,73 @@
 	cursor: pointer;
 	font: inherit;
 	line-height: 1.2;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+	transition:
+		border-color 0.18s ease,
+		box-shadow 0.18s ease,
+		transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .swatch:hover {
 	border-color: var(--swatch-border-selected);
+	transform: translateY(-1px);
 }
 
 .swatch:focus-visible {
 	outline: none;
-	box-shadow: 0 0 0 2px var(--swatch-bg), 0 0 0 4px var(--swatch-ring);
+	box-shadow:
+		0 0 0 2px var(--swatch-bg),
+		0 0 0 4px var(--swatch-ring);
 }
 
+/* ── The pick ──────────────────────────────────────────────────────────────
+   Selecting a swatch is the moment. The chosen chip lifts off the card and a
+   vermilion marker ring is drawn around it. The ring lives in its own pseudo
+   element so it can scale-in independently of the chip, and so colour swatches
+   (round) and button swatches (pill) both inherit it via border-radius. */
 .swatch.is-selected {
 	border-color: var(--swatch-border-selected);
-	box-shadow: 0 0 0 1px var(--swatch-border-selected) inset;
+	transform: translateY(-2px);
+	box-shadow:
+		0 0 0 1px var(--swatch-border-selected) inset,
+		0 6px 14px -6px var(--swatch-ink-soft);
+	z-index: 1;
+}
+
+.swatch.is-selected::before {
+	content: "";
+	position: absolute;
+	inset: -6px;
+	border: 2px solid var(--swatch-ring);
+	border-radius: inherit;
+	/* Slightly hand-drawn: the ring is a hair lopsided and rotated, like a
+	   marker circle rather than a printed outline. */
+	border-bottom-color: var(--swatch-ink-soft);
+	transform: rotate(-3deg) scale(0.82);
+	opacity: 0;
+	pointer-events: none;
+	animation: swatch-ring 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes swatch-ring {
+	0% {
+		opacity: 0;
+		transform: rotate(-9deg) scale(0.7);
+	}
+	60% {
+		opacity: 1;
+		transform: rotate(-1deg) scale(1.04);
+	}
+	100% {
+		opacity: 1;
+		transform: rotate(-3deg) scale(1);
+	}
 }
 
 .swatch.is-disabled,
 .swatch:disabled {
 	cursor: not-allowed;
 	opacity: 0.4;
+	transform: none;
 }
 
 /* Disabled swatches get a diagonal strike so the state is not colour-only. */
@@ -67,6 +132,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
+	border-radius: inherit;
 	background: linear-gradient(
 		to top right,
 		transparent calc(50% - 1px),
@@ -78,22 +144,47 @@
 	pointer-events: none;
 }
 
-/* Colour swatches: round box filled with the term colour. */
+/* Colour swatches: round chip filled with the term colour. The ring lives
+   outside the chip box (inset: -6px) so overflow stays visible — the marker
+   circle is meant to sit around the chip, not be clipped to it. */
 .swatch--color {
-	position: relative;
 	width: var(--swatch-size);
 	height: var(--swatch-size);
 	min-height: var(--swatch-size);
-	overflow: hidden;
+	overflow: visible;
 	border-radius: 50%;
+	background-clip: padding-box;
+}
+
+/* Picked colour chip earns a small "dab" notch — a confident centre mark, like
+   pressing the chip down on the card. Hidden for button swatches (the ring +
+   label already carry the state). */
+.swatch--color.is-selected::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: var(--swatch-bg);
+	box-shadow: 0 0 0 2px var(--swatch-border-selected);
+	transform: translate(-50%, -50%) scale(0);
+	animation: swatch-dab 0.26s 0.06s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+	pointer-events: none;
+}
+
+@keyframes swatch-dab {
+	to {
+		transform: translate(-50%, -50%) scale(1);
+	}
 }
 
 /* Button / label swatches: pill with the term name. */
 .swatch--button {
-	position: relative;
 	min-width: var(--swatch-min-width);
 	height: var(--swatch-size);
-	padding: 0 12px;
+	padding: 0 14px;
 	border-radius: var(--swatch-radius);
 	font-size: 0.875em;
 	font-weight: 500;
@@ -130,8 +221,22 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.swatch {
+	.swatch,
+	.swatch:hover,
+	.swatch.is-selected {
 		transition: none;
+		transform: none;
+	}
+
+	.swatch.is-selected::before,
+	.swatch--color.is-selected::after {
+		animation: none;
+		opacity: 1;
+		transform: rotate(-3deg) scale(1);
+	}
+
+	.swatch--color.is-selected::after {
+		transform: translate(-50%, -50%) scale(1);
 	}
 }
 
@@ -141,5 +246,8 @@
 		--swatch-border-selected: #f0f0f1;
 		--swatch-fg: #f0f0f1;
 		--swatch-bg: #1d2327;
+		--swatch-card: #1d2327;
+		/* A touch brighter so the marker ring keeps its bite on dark cards. */
+		--swatch-ink: var(--wp--preset--color--vivid-red, #ff6a3d);
 	}
 }
