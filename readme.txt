@@ -66,6 +66,12 @@ Yes. Swatches stay in the native variations form with touch-friendly targets; no
 1. Colour and button swatches on a single product page.
 2. The Swatch settings screen under the WooCommerce menu.
 
+== External Services ==
+
+Swatch does not connect to any external services. It makes no outbound HTTP requests, loads no remote scripts, fonts or CDN assets, and sends no telemetry or analytics. There is no account or API key.
+
+Everything is stored in your own database: the swatch type per attribute, the global defaults and a schema version are kept in the `swatch_attribute_types`, `swatch_settings` and `swatch_db_version` options, and each term's colour and label are stored as the `swatch_color` and `swatch_label` term meta on your WooCommerce attribute terms. The plugin sends no email.
+
 == Changelog ==
 
 = 0.1.0 =
