@@ -41,6 +41,15 @@ The full source lives on GitHub at https://github.com/wppoland/swatch if you wan
 
 == Frequently Asked Questions ==
 
+= Documentation and links =
+
+* **Documentation** - https://plogins.com/swatch/docs/
+* **Plugin page** - https://plogins.com/swatch/
+* **Source code** - https://github.com/wppoland/swatch
+* **Bug reports and feature requests** - https://github.com/wppoland/swatch/issues
+* **Discussions and questions** - https://github.com/wppoland/swatch/discussions
+
+
 = Does it require WooCommerce? =
 
 Yes. Swatch extends WooCommerce's variable products and does nothing without it.
