@@ -75,14 +75,19 @@ final class SwatchMarkup
      */
     public function renderProductGroup(array $items, string $type, string $attribute, string $selectId): string
     {
+        $groupStyle    = $this->groupStyle($attribute, $type, 'product');
+        $groupClasses  = $this->groupClasses($attribute, $type, 'product');
+
         ob_start();
         ?>
         <div
-            class="swatch-group swatch-group--<?php echo esc_attr($type); ?>"
+            class="<?php echo esc_attr(implode(' ', $groupClasses)); ?>"
             role="radiogroup"
             aria-label="<?php echo esc_attr(wc_attribute_label($attribute)); ?>"
             data-swatch-for="<?php echo esc_attr($selectId); ?>"
             data-swatch-type="<?php echo esc_attr($type); ?>"
+            data-swatch-attribute="<?php echo esc_attr($attribute); ?>"
+            <?php if ('' !== $groupStyle) : ?>style="<?php echo esc_attr($groupStyle); ?>"<?php endif; ?>
         >
             <?php foreach ($items as $item) :
                 echo $this->renderProductSwatch($item, $type, $attribute);
@@ -98,15 +103,19 @@ final class SwatchMarkup
      */
     public function renderArchiveGroup(array $items, string $type, string $attribute, \WC_Product $product): string
     {
-        $queryKey = 'attribute_' . sanitize_title($attribute);
+        $queryKey     = 'attribute_' . sanitize_title($attribute);
+        $groupStyle   = $this->groupStyle($attribute, $type, 'archive');
+        $groupClasses = $this->groupClasses($attribute, $type, 'archive');
 
         ob_start();
         ?>
         <div
-            class="swatch-archive swatch-group swatch-group--<?php echo esc_attr($type); ?>"
+            class="<?php echo esc_attr(implode(' ', $groupClasses)); ?>"
             role="list"
             aria-label="<?php echo esc_attr(wc_attribute_label($attribute)); ?>"
             data-swatch-type="<?php echo esc_attr($type); ?>"
+            data-swatch-attribute="<?php echo esc_attr($attribute); ?>"
+            <?php if ('' !== $groupStyle) : ?>style="<?php echo esc_attr($groupStyle); ?>"<?php endif; ?>
         >
             <?php foreach ($items as $item) :
                 $url = add_query_arg($queryKey, rawurlencode($item['value']), $product->get_permalink());
@@ -206,5 +215,81 @@ final class SwatchMarkup
             $attribute,
             (string) $this->settings->get('default_type', 'button'),
         );
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function groupClasses(string $attribute, string $type, string $context): array
+    {
+        $classes = [
+            'swatch-group',
+            'swatch-group--' . sanitize_html_class($type),
+        ];
+
+        if ('archive' === $context) {
+            $classes[] = 'swatch-archive';
+        }
+
+        /**
+         * Filters CSS classes on a swatch group wrapper.
+         *
+         * @param list<string> $classes
+         * @param string       $attribute Attribute taxonomy/name.
+         * @param string       $type      Swatch type (color|button).
+         * @param string       $context   `product` or `archive`.
+         */
+        $filtered = apply_filters('swatch/swatch_group_classes', $classes, $attribute, $type, $context);
+
+        if (! is_array($filtered)) {
+            return $classes;
+        }
+
+        $clean = [];
+
+        foreach ($filtered as $class) {
+            $class = sanitize_html_class((string) $class);
+
+            if ('' !== $class) {
+                $clean[] = $class;
+            }
+        }
+
+        return [] !== $clean ? $clean : $classes;
+    }
+
+    private function groupStyle(string $attribute, string $type, string $context): string
+    {
+        /**
+         * Filters CSS custom properties for a swatch group wrapper.
+         *
+         * Keys should be variable names without the leading `--`, for example
+         * `swatch-size` becomes `--swatch-size` in the inline style.
+         *
+         * @param array<string, string> $vars
+         * @param string                $attribute Attribute taxonomy/name.
+         * @param string                $type      Swatch type (color|button).
+         * @param string                $context   `product` or `archive`.
+         */
+        $vars = apply_filters('swatch/swatch_group_vars', [], $attribute, $type, $context);
+
+        if (! is_array($vars) || [] === $vars) {
+            return '';
+        }
+
+        $parts = [];
+
+        foreach ($vars as $name => $value) {
+            $name  = preg_replace('/[^a-z0-9_-]/', '', strtolower((string) $name));
+            $value = trim((string) $value);
+
+            if ('' === $name || '' === $value) {
+                continue;
+            }
+
+            $parts[] = '--' . $name . ':' . $value;
+        }
+
+        return [] !== $parts ? implode(';', $parts) . ';' : '';
     }
 }

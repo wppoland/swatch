@@ -3,7 +3,7 @@
  * Plugin Name:       Swatch - Variation Swatches for WooCommerce
  * Plugin URI:        https://plogins.com/swatch/
  * Description:        Replace variation dropdowns with accessible colour and label swatches.
- * Version:           0.1.3
+ * Version:           0.1.4
  * Requires at least: 6.5
  * Requires PHP:      8.1
  * Requires Plugins:  woocommerce
@@ -24,7 +24,7 @@ namespace Swatch;
 
 defined('ABSPATH') || exit;
 
-const VERSION     = '0.1.3';
+const VERSION     = '0.1.4';
 const PLUGIN_FILE = __FILE__;
 
 define('SWATCH_DIR', plugin_dir_path(__FILE__));
