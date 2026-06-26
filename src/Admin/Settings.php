@@ -95,7 +95,7 @@ final class Settings implements HasHooks
         <div class="wrap swatch-settings">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-            <p class="swatch-intro"><?php esc_html_e('Swatch turns WooCommerce variation dropdowns into accessible colour dots and labelled buttons, so shoppers pick a variation in one tap instead of scanning a select menu. It works out of the box — the settings below are only for fine-tuning.', 'swatch'); ?></p>
+            <p class="swatch-intro"><?php esc_html_e('Swatch turns WooCommerce variation dropdowns into accessible colour dots and labelled buttons, so shoppers pick a variation in one tap instead of scanning a select menu. It works out of the box, the settings below are only for fine-tuning.', 'swatch'); ?></p>
 
             <form method="post" action="options.php">
                 <?php settings_fields(self::PAGE); ?>
@@ -124,7 +124,7 @@ final class Settings implements HasHooks
                                         />
                                         <?php esc_html_e('Show swatches on product pages.', 'swatch'); ?>
                                     </label>
-                                    <p class="description"><?php esc_html_e('When off, shoppers see WooCommerce’s standard variation dropdowns and no swatch styles or scripts load — nothing is lost, the look just reverts to default. Your per-term colours and labels are kept.', 'swatch'); ?></p>
+                                    <p class="description"><?php esc_html_e('When off, shoppers see WooCommerce’s standard variation dropdowns and no swatch styles or scripts load, nothing is lost, the look just reverts to default. Your per-term colours and labels are kept.', 'swatch'); ?></p>
                                 </td>
                             </tr>
                             <tr>
@@ -149,7 +149,7 @@ final class Settings implements HasHooks
                                         <span class="swatch-preview__pill"><?php esc_html_e('Large', 'swatch'); ?></span>
                                     </div>
 
-                                    <p class="description" id="swatch_default_type_desc"><?php esc_html_e('Applied to any attribute you have not given its own type. “Colour” renders colour dots (you set a colour per term); “Button / label” renders the term name as a pill. Either way, an attribute with no colours configured falls back to the dropdown automatically — so this choice never breaks a product.', 'swatch'); ?></p>
+                                    <p class="description" id="swatch_default_type_desc"><?php esc_html_e('Applied to any attribute you have not given its own type. “Colour” renders colour dots (you set a colour per term); “Button / label” renders the term name as a pill. Either way, an attribute with no colours configured falls back to the dropdown automatically, so this choice never breaks a product.', 'swatch'); ?></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -158,7 +158,7 @@ final class Settings implements HasHooks
 
                 <section class="swatch-section">
                     <h2><?php esc_html_e('Per-attribute setup', 'swatch'); ?></h2>
-                    <p class="swatch-section__hint"><?php esc_html_e('Colours and labels live with each attribute, not here — so they stay correct as your catalogue grows.', 'swatch'); ?></p>
+                    <p class="swatch-section__hint"><?php esc_html_e('Colours and labels live with each attribute, not here, so they stay correct as your catalogue grows.', 'swatch'); ?></p>
                     <p class="description">
                         <?php
                         printf(

@@ -104,7 +104,7 @@ msgstr "Swatch"
 msgid ""
 "Swatch turns WooCommerce variation dropdowns into accessible colour dots and "
 "labelled buttons, so shoppers pick a variation in one tap instead of "
-"scanning a select menu. It works out of the box — the settings below are "
+"scanning a select menu. It works out of the box, the settings below are "
 "only for fine-tuning."
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 #: src/Admin/Settings.php:127
 msgid ""
 "When off, shoppers see WooCommerce’s standard variation dropdowns and no "
-"swatch styles or scripts load — nothing is lost, the look just reverts to "
+"swatch styles or scripts load, nothing is lost, the look just reverts to "
 "default. Your per-term colours and labels are kept."
 msgstr ""
 
@@ -166,7 +166,7 @@ msgid ""
 "Applied to any attribute you have not given its own type. “Colour” renders "
 "colour dots (you set a colour per term); “Button / label” renders the term "
 "name as a pill. Either way, an attribute with no colours configured falls "
-"back to the dropdown automatically — so this choice never breaks a product."
+"back to the dropdown automatically, so this choice never breaks a product."
 msgstr ""
 
 #: src/Admin/Settings.php:160
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/Admin/Settings.php:161
 msgid ""
-"Colours and labels live with each attribute, not here — so they stay correct "
+"Colours and labels live with each attribute, not here, so they stay correct "
 "as your catalogue grows."
 msgstr ""
 
