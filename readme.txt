@@ -69,6 +69,11 @@ Yes. Swatches use radiogroup semantics, arrow-key navigation and visible focus r
 
 Yes. Swatches stay in the native variations form with touch-friendly targets; no separate mobile app or script framework is required.
 
+
+= Does this plugin work on WordPress Multisite? =
+
+Yes. This plugin is compatible with WordPress Multisite. Network activate it or activate it on individual sites; each site keeps its own settings and data.
+
 == Screenshots ==
 
 1. Colour and button swatches on a single product page.
